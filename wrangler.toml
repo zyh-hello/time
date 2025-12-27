@@ -1,6 +1,6 @@
 # 正确的配置
 name = "time1"
-main = "src/index.ts"           # 确保这个路径正确
+main = "/src/index.ts"           # 确保这个路径正确
 compatibility_date = "2024-01-01"
 
 [build]
