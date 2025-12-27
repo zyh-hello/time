@@ -1,5 +1,14 @@
 {
   "$schema": "node_modules/wrangler/config-schema.json",
+  "name": "time1",
+  "main": "/src/index.ts",
+  "compatibility_date": "2025-02-04",
+  "observability": {
+    "enabled": true
+  },
+
+{
+  "$schema": "node_modules/wrangler/config-schema.json",
   "name": "WORKER-NAME",
   "main": "src/index.ts",
   "compatibility_date": "2025-02-04",
@@ -17,4 +26,5 @@
       "preview_id": "<ID_OF_PREVIEW_KV_NAMESPACE_FOR_LOCAL_DEVELOPMENT>"
     }
   ]
+
 }
