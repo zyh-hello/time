@@ -1,6 +1,6 @@
 
 name = "time1"
-main = "src/index.ts"
+main = "/src/index.ts"
 compatibility_date = "2024-01-01"
 
 # 如果有 KV 或其他绑定
