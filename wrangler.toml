@@ -1,8 +1,9 @@
-# 正确的配置
+
 name = "time1"
-main = "/src/index.ts"           # 确保这个路径正确
+main = "src/index.ts"
 compatibility_date = "2024-01-01"
 
-[build]
-# 如果有构建命令，确保输出正确
-command = "npm run build"
+# 如果有 KV 或其他绑定
+kv_namespaces = [
+  { binding = "KV", id = "2ad13e192faa4166aaa9dc30a5149b02" }
+]
