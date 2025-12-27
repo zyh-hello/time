@@ -1,0 +1,6 @@
+- name: Deploy
+  run: |
+    # 如果有构建步骤，先构建
+    npm run build
+    # 然后部署
+    npx wrangler deploy
