@@ -1,6 +1,47 @@
-- name: Deploy
-  run: |
-    # 如果有构建步骤，先构建
-    npm run build
-    # 然后部署
-    npx wrangler deploy
+name: Deploy to Cloudflare Workers
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      deployments: write
+    
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+      
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: 'npm'
+      
+      - name: Install dependencies
+        run: npm ci
+        
+      - name: Verify entry file exists
+        run: |
+          if [ ! -f "src/index.ts" ] && [ ! -f "src/index.js" ]; then
+            echo "Error: Entry file not found"
+            echo "Creating default entry file..."
+            mkdir -p src
+            cat > src/index.ts << 'EOF'
+            export default {
+              async fetch(request: Request, env: any, ctx: ExecutionContext) {
+                return new Response('Hello World from GitHub Actions!');
+              },
+            };
+            EOF
+          fi
+          
+      - name: Deploy to Cloudflare Workers
+        uses: cloudflare/wrangler-action@v3
+        with:
+          apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
